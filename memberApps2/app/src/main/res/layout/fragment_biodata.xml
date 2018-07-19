@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    android:paddingLeft="16dp"
+    tools:context="Fragment.Biodata">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/contnama"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/cont_image"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:background="@drawable/ic_menu_person"
+                    android:layout_gravity="center"/>
+
+                <EditText
+                    android:id="@+id/txtnama"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:hint="Nama"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:layout_gravity="center_vertical"
+                    android:inputType="textCapWords"/>
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/txtnis"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:hint="NIS"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/txtangkatan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:hint="Angkatan"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:inputType="textCapWords"/>
+
+            <EditText
+                android:id="@+id/txttmptlahir"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Tempat Lahir"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:inputType="textCapWords"/>
+
+            <EditText
+                android:id="@+id/txttgllahir"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="false"
+                android:hint="Tanggal Lahir"
+                android:inputType="date"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/txtemail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Email"
+                android:inputType="textEmailAddress"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/txthp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="HandPhone"
+                android:inputType="phone"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/txtalamat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Alamat"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:inputType="textMultiLine"/>
+
+            <EditText
+                android:id="@+id/txtkota"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Kota"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:inputType="textCapWords"/>
+
+            <EditText
+                android:id="@+id/txtkodepos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Kode Pos"
+                android:inputType="textPostalAddress"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/txtpekerjaan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Pekerjaan"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:inputType="textCapWords"/>
+
+            <EditText
+                android:id="@+id/txtjabatan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Posisi"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:inputType="textCapWords"/>
+
+            <EditText
+                android:id="@+id/namainstansi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nama Instansi"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:inputType="textCapWords"/>
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>
