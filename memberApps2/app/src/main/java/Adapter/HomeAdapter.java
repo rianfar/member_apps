@@ -1,4 +1,4 @@
-package Adapter;
+package adapter;
 
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
@@ -10,8 +10,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.memberapps2.R;
-
-import Fragment.Fragment_home;
 
 public class HomeAdapter extends BaseAdapter {
     TextView text1, text2, text3;

@@ -1,4 +1,4 @@
-package Adapter;
+package adapter;
 
 import android.app.Activity;
 import android.graphics.drawable.Drawable;

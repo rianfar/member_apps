@@ -9,8 +9,7 @@ import android.widget.ListView;
 
 import com.memberapps2.R;
 
-import Adapter.HomeAdapter;
-import Adapter.InfoAdapter;
+import adapter.InfoAdapter;
 
 public class Info extends Fragment {
     ListView lv;
