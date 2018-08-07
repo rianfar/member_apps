@@ -29,7 +29,7 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("YISC AL AZHAR");
+        toolbar.setTitle("YISC AL AZHAR PUSAT");
         setSupportActionBar(toolbar);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
