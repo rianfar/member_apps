@@ -1,5 +1,6 @@
 package connection;
 
+import model.RequestLogin;
 import model.UserList;
 import model.UserLogin;
 import okhttp3.Response;
@@ -13,6 +14,7 @@ import retrofit2.http.POST;
 public interface LoginAPI {
     @POST("api/members/login")
 
-    Call<UserLogin> loginUser(@Body UserLogin login);
+//    Call<UserLogin> loginUser(@Body RequestLogin login);
+    Call<UserList> responseUser(@Body UserLogin requestUser);
 }
 

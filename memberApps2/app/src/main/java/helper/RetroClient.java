@@ -16,7 +16,7 @@ public class RetroClient {
 
     private static LoginAPI service;
     private static RetroClient retroClient;
-
+    public static Retrofit retrofit;
     private RetroClient() {
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -27,6 +27,16 @@ public class RetroClient {
         service = retrofit.create(LoginAPI.class);
     }
 
+    public static Retrofit getClient() {
+        if (retrofit == null) {
+            retrofit = new Retrofit.Builder()
+                    .baseUrl(ROOT_URL)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+        }
+        return retrofit;
+    }
+
     public static RetroClient getInstance() {
         if (retroClient == null) {
             retroClient = new RetroClient();
@@ -34,8 +44,7 @@ public class RetroClient {
         return retroClient;
     }
 
-    public void loginUser(UserLogin user, Callback<UserLogin> callback) {
-        Call<UserLogin> userCall = service.loginUser(user);
-        userCall.enqueue(callback);
-    }
+
+
+
 }
