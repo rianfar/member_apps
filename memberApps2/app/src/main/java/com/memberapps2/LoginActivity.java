@@ -68,7 +68,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
 
-         login("wkkssks0g88sss004wko08ok44kkw80osss40gkc","rienditya@gmail.com","password");
+         login("wkkssks0g88sss004wko08ok44kkw80osss40gkc",email,password);
 
 
     }
