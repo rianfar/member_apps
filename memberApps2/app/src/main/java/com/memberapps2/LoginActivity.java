@@ -21,14 +21,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import adapter.UserAdapter;
+//import adapter.UserAdapter;
 import connection.LoginAPI;
-import connection.ServerConnection;
-import connection.Service;
+//import connection.ServerConnection;
+//import connection.Service;
 import helper.RetroClient;
 import model.MainApplication;
-import model.User;
-import model.UserList;
+//import model.User;
+//import model.UserList;
 import model.UserLogin;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -39,7 +39,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
      private Boolean status;
     private ProgressDialog pDialog;
     private RecyclerView recyclerView;
-    private UserAdapter userAdapter;
+//    private UserAdapter userAdapter;
     EditText txtusername,txtpassword;
     LoginAPI api;
 
