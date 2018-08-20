@@ -1,69 +1,61 @@
 package adapter;
 
 import android.app.Activity;
+import android.content.Context;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.memberapps2.R;
+import com.squareup.picasso.Picasso;
 
-public class HomeAdapter extends BaseAdapter {
-    TextView text1, text2, text3;
-    ImageView imgView;
-    String[][] data;
-    Activity activity;
+import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicInteger;
 
-    public HomeAdapter(Activity activity, String[][] data) {
-        super();
-        this.data = data;
-        this.activity = activity;
-    }
-    @Override
-    public int getCount() {
-        return data.length;
-    }
+import connection.LoginAPI;
+import model.Artikel;
+import model.Datum;
 
-    @Override
-    public Object getItem(int position) {
-        return data[position];
-    }
+public class HomeAdapter extends ArrayAdapter<Datum> {
+    private Context context;
+    TextView ID, post_title, post_date;
+    ImageView post_picture;
 
-    @Override
-    public long getItemId(int position) {
-        return 0;
+    public HomeAdapter(Context context, ArrayList<Datum> homeAdapter) {
+        super(context, 0, homeAdapter);
+        this.context = context;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View v = convertView;
-
-        if (v == null) {
-            LayoutInflater vi;
-            vi = LayoutInflater.from(activity);
-            v = vi.inflate(R.layout.mylist, null);
+        if (convertView == null) {
+            LayoutInflater layoutInflater = LayoutInflater.from(this.context);
+            convertView = layoutInflater.inflate(R.layout.mylist, null);
         }
 
-        Object p = getItem(position);
+        Datum Datum = getItem(position);
 
-        if (p != null) {
-            text1 = (TextView) v.findViewById(R.id.Itemname);
-            text2 = (TextView) v.findViewById(R.id.Desc);
-            text3 = (TextView) v.findViewById(R.id.Bidang);
-            imgView = (ImageView) v.findViewById(R.id.image1);
+        ID = (TextView) convertView.findViewById(R.id.Itemname);
+        ID.setText(Datum.getID());
+        ID.setTextColor(Color.RED);
+        post_title = (TextView) convertView.findViewById(R.id.Desc);
+        post_title.setText(Datum.getPostTitle());
+        post_title.setTextColor(Color.RED);
+        post_date = (TextView) convertView.findViewById(R.id.Bidang);
+        post_date.setText(Datum.getPostDate());
+        post_date.setTextColor(Color.RED);
+        post_picture = (ImageView) convertView.findViewById(R.id.image1);
+        Picasso.with(context)
+                .load(Datum.getPostPicture().toString())
+                .into(post_picture);
 
-            int id = activity.getResources().getIdentifier(data[position][3], "drawable", activity.getPackageName());
-            Drawable drawable = activity.getResources().getDrawable(id);
-
-            text1.setText(data[position][0]);
-            text2.setText(data[position][1]);
-            text3.setText(data[position][2]);
-            imgView.setImageDrawable(drawable);
-        }
-
-        return v;
+        return convertView;
     }
 }

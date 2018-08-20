@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.constraint.solver.Goal;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,6 +16,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -29,28 +33,30 @@ import helper.RetroClient;
 import model.MainApplication;
 //import model.User;
 //import model.UserList;
+import model.UserList;
 import model.UserLogin;
+import model.UserMember;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
-     private Boolean status;
+    private Boolean status;
     private ProgressDialog pDialog;
     private RecyclerView recyclerView;
-//    private UserAdapter userAdapter;
-    EditText txtusername,txtpassword;
+    //    private UserAdapter userAdapter;
+    EditText txtusername, txtpassword;
     LoginAPI api;
 
     @Override
-    protected void onCreate( Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
-         txtusername = (EditText)findViewById(R.id.txtusername);
-         txtpassword = (EditText)findViewById(R.id.txtpassword);
+        txtusername = (EditText) findViewById(R.id.txtusername);
+        txtpassword = (EditText) findViewById(R.id.txtpassword);
 
-        Button btnLogin = (Button)findViewById(R.id.btnlogin);
+        Button btnLogin = (Button) findViewById(R.id.btnlogin);
         btnLogin.setOnClickListener(this);
     }
 
@@ -63,22 +69,46 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         pDialog.setCancelable(false);
         pDialog.show();
 
-        String email    = txtusername.getText().toString();
+        String email = txtusername.getText().toString();
         String password = txtpassword.getText().toString();
 
-
-
-         login("wkkssks0g88sss004wko08ok44kkw80osss40gkc",email,password);
-
+//        login("wkkssks0g88sss004wko08ok44kkw80osss40gkc", email, password);
+        member("wkkssks0g88sss004wko08ok44kkw80osss40gkc", email);
+//        member();
 
     }
 
-//    @POST
-//    Call<TestEntity> testOperation(@Body TestRequestBean requestBean);
+    private void member(String key, String user_id) {
+        RetroClient.getClient().create(LoginAPI.class).responseMember(key, user_id).enqueue(new Callback<UserMember>() {
+            @Override
+            public void onResponse(Call<UserMember> call, Response<UserMember> response) {
+                if (response.isSuccessful()) {
+                    pDialog.dismiss();
+                    Gson gson = new Gson();
+                    String j = gson.toJson(response.body());
+
+                    Log.i("response", j);
+                    Log.i("response2", response.raw().request().url().toString());
+                    Log.i("response3", response.body().getData().getId());
+                    Log.i("response4", response.body().getStatus().toString());
+
+                    if (response.body().getStatus() == true) {
+                        Intent inten = new Intent(LoginActivity.this, Home.class);
+                        startActivity(inten);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UserMember> call, Throwable throwable) {
+
+            }
+        });
+    }
 //    response , request
 
-    private void login(String key, String email, String password){
-
+    private void login(String key, String email, String password) {
+        //login
         final UserLogin userLogin = new UserLogin();
         userLogin.setKey(key);
         userLogin.setEmail(email);
@@ -86,11 +116,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         RetroClient.getClient().create(LoginAPI.class).responseUser(userLogin).enqueue(new Callback<UserList>() {
             @Override
             public void onResponse(Call<UserList> call, Response<UserList> response) {
-                if(response.isSuccessful()){
+                if (response.isSuccessful()) {
+                    Gson gson = new Gson();
+                    String j = gson.toJson(response.body());
+                    Log.i("response",j);
+                    Log.i("response2", response.raw().request().url().toString());
                     pDialog.dismiss();
                     UserList list = response.body();
                     list.data.getUser_id();
-                    if(list.status == true) {
+                    if (list.status == true) {
 
                         Intent inten = new Intent(LoginActivity.this, Home.class);
                         startActivity(inten);
@@ -120,7 +154,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 //            }
 //        });
     }
-
 
 
 //    private void login(String key,String email, String password) {

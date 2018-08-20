@@ -1,39 +1,86 @@
 package Fragment;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.AtomicFile;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import adapter.HomeAdapter;
+import connection.LoginAPI;
+import helper.RetroClient;
+import model.Artikel;
+import model.Datum;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+import com.google.gson.Gson;
 import com.memberapps2.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Fragment_home extends Fragment {
     ListView lv;
+    ProgressDialog pDialog;
+    final ArrayList<Datum> artikels = new ArrayList<>();
+    HomeAdapter homeAdapter;
+    List<Datum> listdatum;
+    String id, post_title, post_date, post_picture;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        String[][] title = new String[][]{
-                {"Day reappeared. The tempest still raged with undiminished","Corned beef prosciutto ground...","Pendidikan","ic_menu_home"},
-                {"There were some signs of a calm at noon","Things to enjoy","Kajian","ic_menu_message"},
-                {"Fun tropical escapes","The night was comparatively quiet. Some of the sails were again.","Sosial","ic_menu_person"},
-                {"Pork loin sausage shankle, kielbasa bacon beef ribs","Drumstick turkey shoulder square...","Pendidikan","ic_menu_person_add"},
-                {"Cherry blossoms in bloom","Spring is here and we all know...","Pendidikan","ic_menu_school"},
-                {"Day reappeared. The tempest still raged with undiminished","Corned beef prosciutto ground...","Pendidikan","ic_menu_home"},
-                {"There were some signs of a calm at noon","Things to enjoy","Kajian","ic_menu_message"},
-                {"Fun tropical escapes","The night was comparatively quiet. Some of the sails were again.","Sosial","ic_menu_person"},
-                {"Pork loin sausage shankle, kielbasa bacon beef ribs","Drumstick turkey shoulder square...","Pendidikan","ic_menu_person_add"},
-                {"Cherry blossoms in bloom","Spring is here and we all know...","Pendidikan","ic_menu_school"}
-        };
-
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-        lv = (ListView) view.findViewById(R.id.listView1);
-        HomeAdapter adapter = new HomeAdapter(this.getActivity(), title);
-//        ArrayAdapter<String> adapterlistmenu = new ArrayAdapter<String>(getActivity(), R.layout.mylist, R.id.Itemname, title);
-        lv.setAdapter(adapter);
-        return view;
 
+        pDialog = new ProgressDialog(getActivity());
+        pDialog.setMessage("Loading Data.. Please wait...");
+        pDialog.setIndeterminate(false);
+        pDialog.setCancelable(false);
+        pDialog.show();
+
+        artikel("1");
+        return view;
+    }
+
+    private void artikel(String page) {
+        RetroClient.getClient().create(LoginAPI.class).responseArtikel(page).enqueue(new Callback<Artikel>() {
+            @Override
+            public void onResponse(Call<Artikel> call, Response<Artikel> response) {
+                if (response.isSuccessful()) {
+                    pDialog.dismiss();
+                    Gson gson = new Gson();
+                    String j = gson.toJson(response.body());
+                    Log.i("responseartikel", j);
+
+                    listdatum = response.body().getData();
+                    for (int i = 0; i < listdatum.size(); i++) {
+                        id = listdatum.get(i).getID();
+                        post_title = listdatum.get(i).getPostTitle();
+                        post_date = listdatum.get(i).getPostDate();
+                        post_picture = (String) listdatum.get(i).getPostPicture();
+                        if (post_picture == null) {
+                            post_picture = (String) listdatum.get(1).getPostPicture();
+                        } else {
+                            post_picture = (String) listdatum.get(i).getPostPicture();
+                        }
+                        artikels.add(new Datum(id, post_title, post_date, post_picture));
+                        homeAdapter = new HomeAdapter(getActivity().getApplicationContext(), artikels);
+                        lv = (ListView) getView().findViewById(R.id.listView1);
+                        lv.setAdapter(homeAdapter);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Artikel> call, Throwable throwable) {
+
+            }
+        });
     }
 }

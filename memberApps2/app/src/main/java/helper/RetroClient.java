@@ -12,7 +12,7 @@ public class RetroClient {
      * URLS
      *******/
 
-    private static final String ROOT_URL = "http://internal.yisc-alazhar.or.id/";
+    private static final String ROOT_URL = "https://internal.yisc-alazhar.or.id/";
 
     private static LoginAPI service;
     private static RetroClient retroClient;
