@@ -15,6 +15,7 @@ import adapter.HomeAdapter;
 import connection.LoginAPI;
 import helper.RetroClient;
 import model.Artikel;
+import model.Category;
 import model.Datum;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -32,7 +33,9 @@ public class Fragment_home extends Fragment {
     final ArrayList<Datum> artikels = new ArrayList<>();
     HomeAdapter homeAdapter;
     List<Datum> listdatum;
-    String id, post_title, post_date, post_picture;
+    List<Category> categoryList;
+    String id, post_title, post_date, post_url,post_picture,term_id,name;
+    StringBuffer sb;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -63,16 +66,25 @@ public class Fragment_home extends Fragment {
                         id = listdatum.get(i).getID();
                         post_title = listdatum.get(i).getPostTitle();
                         post_date = listdatum.get(i).getPostDate();
+                        post_url = listdatum.get(i).getPostUrl();
+
                         post_picture = (String) listdatum.get(i).getPostPicture();
                         if (post_picture == null) {
                             post_picture = (String) listdatum.get(1).getPostPicture();
                         } else {
                             post_picture = (String) listdatum.get(i).getPostPicture();
                         }
-                        artikels.add(new Datum(id, post_title, post_date, post_picture));
+                        categoryList = listdatum.get(i).getPost_cats();
+                        for (int k = i; k < categoryList.size(); k++) {
+                            term_id = categoryList.get(k).getTerm_id();
+                            name = categoryList.get(k).getName();
+//                            sb.append(name);
+                        }
+                        artikels.add(new Datum(name, post_title, post_date, post_url, post_picture));
                         homeAdapter = new HomeAdapter(getActivity().getApplicationContext(), artikels);
                         lv = (ListView) getView().findViewById(R.id.listView1);
                         lv.setAdapter(homeAdapter);
+
                     }
                 }
             }

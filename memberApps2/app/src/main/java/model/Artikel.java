@@ -29,4 +29,6 @@ public class Artikel {
     public void setData(List<Datum> data) {
         this.data = data;
     }
+
+
 }

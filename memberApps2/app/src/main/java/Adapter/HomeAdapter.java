@@ -21,11 +21,12 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import connection.LoginAPI;
 import model.Artikel;
+import model.Category;
 import model.Datum;
 
 public class HomeAdapter extends ArrayAdapter<Datum> {
     private Context context;
-    TextView ID, post_title, post_date;
+    TextView name, post_title, post_date;
     ImageView post_picture;
 
     public HomeAdapter(Context context, ArrayList<Datum> homeAdapter) {
@@ -41,16 +42,15 @@ public class HomeAdapter extends ArrayAdapter<Datum> {
         }
 
         Datum Datum = getItem(position);
-
-        ID = (TextView) convertView.findViewById(R.id.Itemname);
-        ID.setText(Datum.getID());
-        ID.setTextColor(Color.RED);
+        name = (TextView) convertView.findViewById(R.id.Itemname);
+        name.setText(Datum.getName());
+        name.setTextColor(Color.BLACK);
         post_title = (TextView) convertView.findViewById(R.id.Desc);
         post_title.setText(Datum.getPostTitle());
-        post_title.setTextColor(Color.RED);
+        post_title.setTextColor(Color.BLACK);
         post_date = (TextView) convertView.findViewById(R.id.Bidang);
         post_date.setText(Datum.getPostDate());
-        post_date.setTextColor(Color.RED);
+        post_date.setTextColor(Color.BLACK);
         post_picture = (ImageView) convertView.findViewById(R.id.image1);
         Picasso.with(context)
                 .load(Datum.getPostPicture().toString())
