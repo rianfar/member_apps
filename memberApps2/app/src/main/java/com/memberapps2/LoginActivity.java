@@ -80,7 +80,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void member(String key, String user_id) {
         RetroClient.getClient().create(LoginAPI.class).responseMember(key, user_id).enqueue(new Callback<UserMember>() {
-        UserMember userdata = new UserMember();
             @Override
             public void onResponse(Call<UserMember> call, Response<UserMember> response) {
                 if (response.isSuccessful()) {
@@ -90,11 +89,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                     Log.i("response", j);
                     Log.i("response2", response.raw().request().url().toString());
-                    Log.i("response3", response.body().getData().getUserId());
+                    Log.i("response3", response.body().getData().getId());
                     Log.i("response4", response.body().getStatus().toString());
-
-                    UserMember.ListMember listMember = userdata.new ListMember();
-                    listMember.setId(response.body().getData().getUserId());
 
                     if (response.body().getStatus() == true) {
                         Intent inten = new Intent(LoginActivity.this, Home.class);

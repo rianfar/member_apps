@@ -159,10 +159,6 @@ public class UserMember {
         @Expose
         private Object pendidikan;
 
-//        public ListMember(String userId){
-//            this.userId = userId;
-//        }
-
         public String getId() {
             return id;
         }

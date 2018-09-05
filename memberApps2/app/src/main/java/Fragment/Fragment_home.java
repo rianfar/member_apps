@@ -76,7 +76,7 @@ public class Fragment_home extends Fragment {
                         }
                         categoryList = listdatum.get(i).getPost_cats();
                         for (int k = i; k < categoryList.size(); k++) {
-                            term_id = categoryList.get(k).getTerm_Id();
+                            term_id = categoryList.get(k).getTerm_id();
                             name = categoryList.get(k).getName();
 //                            sb.append(name);
                         }
