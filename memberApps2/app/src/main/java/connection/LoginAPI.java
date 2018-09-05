@@ -30,5 +30,19 @@ public interface LoginAPI {
 
     @GET("api/articles/index/{page}")
     Call<Artikel> responseArtikel(@Query(value = "page") String page);
+
+    @GET("api/members/update/{key}/{id}/{member_no}/{member_name}/{member_nickname}/{member_gender}/{member_blood}/" +
+            "{member_pob}/{member_dob}/{member_hoby}/{member_alamat}/{member_kota}/{member_poscode}/{member_telp}/" +
+            "{member_hp}/{member_pinbb}/{member_job}/{member_jabatan}/{member_office_address}/{member_office_telp}/{member_angkatan}")
+    Call<UserMember> responseUpdateMember(@Query(value = "key") String key, @Query(value = "id") Integer user_id, @Query(value = "member_no") String member_no,
+        @Query(value = "member_name") String member_name, @Query(value = "member_nickname") String member_nickname,
+        @Query(value = "member_gender") Integer member_gender, @Query(value = "member_blood") String member_blood,
+        @Query(value = "member_pob") String member_pob, @Query(value = "member_dob") String member_dob,
+        @Query(value = "member_hoby") String member_hoby, @Query(value = "member_alamat") String member_alamat,
+        @Query(value = "member_kota") String member_kota, @Query(value = "member_poscode") String member_poscode,
+        @Query(value = "member_telp") String member_telp, @Query(value = "member_hp") String member_hp,
+        @Query(value = "member_pinbb") String member_pinbb, @Query(value = "member_job") Integer member_job,
+        @Query(value = "member_jabatan") String member_jabatan, @Query(value = "member_office_address") String member_office_address,
+        @Query(value = "member_office_telp") String member_office_telp, @Query(value = "member_angkatan") String member_angkatan);
 }
 
