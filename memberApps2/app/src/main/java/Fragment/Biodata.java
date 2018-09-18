@@ -34,9 +34,9 @@ import retrofit2.Response;
 
 public class Biodata extends Fragment {
     ProgressDialog pDialog;
-    EditText txtnama, txtnis, txtangkatan, txttmptlahir, txttgllahir, txtemail, txthp, txtalamat, txtkota, txtkodepos,
-            txtpekerjaan, txtposisi, txtnamainstansi;
+    EditText txtnama, txtId,txtemail, txtnickname,txtpob,txtdob,txthp,txtgender,txtangkatan;
 //    Button btnedit;
+    String gender="";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -46,18 +46,12 @@ public class Biodata extends Fragment {
         listMember1.getUserId();
 
         txtnama = (EditText) v.findViewById(R.id.txtnama);
-        txtnis = (EditText) v.findViewById(R.id.txtnis);
-        txtangkatan = (EditText) v.findViewById(R.id.txtangkatan);
-        txttmptlahir = (EditText) v.findViewById(R.id.txttmptlahir);
-        txttgllahir = (EditText) v.findViewById(R.id.txttgllahir);
         txtemail = (EditText) v.findViewById(R.id.txtemail);
+        txtId = (EditText) v.findViewById(R.id.txtId);
+        txtgender = (EditText) v.findViewById(R.id.txtgender);
+        txtangkatan = (EditText) v.findViewById(R.id.txtangkatan);
         txthp = (EditText) v.findViewById(R.id.txthp);
-        txtalamat = (EditText) v.findViewById(R.id.txtalamat);
-        txtkota = (EditText) v.findViewById(R.id.txtkota);
-        txtkodepos = (EditText) v.findViewById(R.id.txtkodepos);
-        txtpekerjaan = (EditText) v.findViewById(R.id.txtpekerjaan);
-        txtposisi = (EditText) v.findViewById(R.id.txtjabatan);
-        txtnamainstansi = (EditText) v.findViewById(R.id.namainstansi);
+
 
 //        btnedit = (Button) v.findViewById(R.id.btnedit);
 //        btnedit.setOnClickListener(new View.OnClickListener() {
@@ -67,8 +61,8 @@ public class Biodata extends Fragment {
 //            }
 //        });
 
-        awal();
-        calender();
+//        awal();
+//        calender();
 
         // Inflate the layout for this fragment
         pDialog = new ProgressDialog(getActivity());
@@ -94,8 +88,15 @@ public class Biodata extends Fragment {
                     Log.i("response2", response.raw().request().url().toString());
 
                     txtnama.setText(response.body().data.getMemberName());
-                    txtnis.setText(response.body().data.getId());
+                    txtId.setText(response.body().data.getId());
+                    txtemail.setText(response.body().data.getMemberEmail());
+                    txthp.setText(response.body().data.getMemberHp());
                     txtangkatan.setText(response.body().data.getMemberAngkatan());
+                    if(response.body().data.getMemberGender()=="0"){
+                        gender = "Perempuan";
+                        txtgender.setText(gender);
+                    }else{ gender = "Laki-Laki"; txtgender.setText(gender);}
+
                 }
             }
 
@@ -106,31 +107,31 @@ public class Biodata extends Fragment {
         });
     }
 
-    public void calender() {
-        txttgllahir.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DialogFragment df = new DatePickerDialogFragment();
-                df.show(getFragmentManager(), "Date Picker");
-//                Log.e("tanggalclick", "error");
-            }
-        });
-    }
+//    public void calender() {
+//        txtdob.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                DialogFragment df = new DatePickerDialogFragment();
+//                df.show(getFragmentManager(), "Date Picker");
+////                Log.e("tanggalclick", "error");
+//            }
+//        });
+//    }
 
     public void awal() {
         txtnama.setEnabled(false);
-        txtnis.setEnabled(false);
-        txtangkatan.setEnabled(false);
-        txttmptlahir.setEnabled(false);
-        txttgllahir.setEnabled(false);
         txtemail.setEnabled(false);
+//        txtangkatan.setEnabled(false);
+//        txttmptlahir.setEnabled(false);
+//        txttgllahir.setEnabled(false);
+//        txtemail.setEnabled(false);
         txthp.setEnabled(false);
-        txtalamat.setEnabled(false);
-        txtkota.setEnabled(false);
-        txtkodepos.setEnabled(false);
-        txtpekerjaan.setEnabled(false);
-        txtposisi.setEnabled(false);
-        txtnamainstansi.setEnabled(false);
+//        txtalamat.setEnabled(false);
+//        txtkota.setEnabled(false);
+//        txtkodepos.setEnabled(false);
+//        txtpekerjaan.setEnabled(false);
+//        txtposisi.setEnabled(false);
+//        txtnamainstansi.setEnabled(false);
     }
 
     public void updatemember() {

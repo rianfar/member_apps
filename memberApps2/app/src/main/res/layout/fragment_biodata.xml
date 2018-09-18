@@ -21,8 +21,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <ImageView
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
                     android:background="@drawable/ic_menu_person"
                     android:layout_gravity="center"/>
 
@@ -32,14 +32,25 @@
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:hint="Nama"
-                    android:textSize="20dp"
+                    android:textSize="15dp"
                     android:textStyle="bold"
                     android:layout_gravity="center_vertical"
                     android:inputType="textCapWords"/>
             </LinearLayout>
 
             <EditText
-                android:id="@+id/txtnis"
+                android:id="@+id/txtId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:hint="ID"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+
+            <EditText
+                android:id="@+id/txtemail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -48,43 +59,6 @@
                 android:textSize="20dp"
                 android:textStyle="bold" />
 
-            <EditText
-                android:id="@+id/txtangkatan"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:hint="Angkatan"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                android:inputType="textCapWords"/>
-
-            <EditText
-                android:id="@+id/txttmptlahir"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Tempat Lahir"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                android:inputType="textCapWords"/>
-
-            <EditText
-                android:id="@+id/txttgllahir"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:focusable="false"
-                android:hint="Tanggal Lahir"
-                android:inputType="date"
-                android:textSize="20dp"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/txtemail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Email"
-                android:inputType="textEmailAddress"
-                android:textSize="20dp"
-                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/txthp"
@@ -96,58 +70,28 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/txtalamat"
+                android:id="@+id/txtgender"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Alamat"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                android:inputType="textMultiLine"/>
-
-            <EditText
-                android:id="@+id/txtkota"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Kota"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                android:inputType="textCapWords"/>
-
-            <EditText
-                android:id="@+id/txtkodepos"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Kode Pos"
-                android:inputType="textPostalAddress"
+                android:hint="Gender"
+                android:inputType="phone"
                 android:textSize="20dp"
                 android:textStyle="bold" />
 
-            <EditText
-                android:id="@+id/txtpekerjaan"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Pekerjaan"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                android:inputType="textCapWords"/>
 
             <EditText
-                android:id="@+id/txtjabatan"
+                android:id="@+id/txtangkatan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Posisi"
+                android:hint="Angkatan"
+                android:inputType="phone"
                 android:textSize="20dp"
-                android:textStyle="bold"
-                android:inputType="textCapWords"/>
+                android:textStyle="bold" />
 
-            <EditText
-                android:id="@+id/namainstansi"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Nama Instansi"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                android:inputType="textCapWords"/>
+
+
+            android:inputType="textCapWords"/>
+
         </LinearLayout>
     </ScrollView>
 
