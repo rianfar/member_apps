@@ -4,10 +4,20 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#fff">
-    <ListView
-        android:id="@+id/listView1"
+
+    <FrameLayout
+        android:id="@+id/content"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-     </ListView>
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <ListView
+            android:id="@+id/listView1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </ListView>
+    </FrameLayout>
+
+
+
 
 </LinearLayout>
