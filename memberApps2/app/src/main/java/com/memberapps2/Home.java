@@ -19,6 +19,7 @@ import Fragment.Pendaftaran;
 import Fragment.Pendidikan;
 import Fragment.Pesan;
 import Fragment.Profile;
+import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
 public class Home extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -31,7 +32,6 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("YISC AL AZHAR");
 //        setSupportActionBar(toolbar);
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
