@@ -3,6 +3,8 @@ package com.memberapps2;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.constraint.solver.Goal;
@@ -21,11 +23,22 @@ import com.google.gson.Gson;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 //import adapter.UserAdapter;
+import javax.net.ssl.HttpsURLConnection;
+
 import connection.LoginAPI;
 //import connection.ServerConnection;
 //import connection.Service;
@@ -57,7 +70,29 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         txtpassword = (EditText) findViewById(R.id.txtpassword);
 
         Button btnLogin = (Button) findViewById(R.id.btnlogin);
-        btnLogin.setOnClickListener(this);
+       // btnLogin.setOnClickListener(this);
+
+        // Login button Click Event
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View view) {
+                String email = txtusername.getText().toString().trim();
+                String password = txtpassword.getText().toString().trim();
+
+                // Check for empty data in the form
+                if (!email.isEmpty() && !password.isEmpty()) {
+                    // login user
+                    Login(email, password);
+
+                } else {
+                    // Prompt user to enter credentials
+                    Toast.makeText(getApplicationContext(),
+                            "Silahkan Masukan Email dan Password Anda!", Toast.LENGTH_LONG)
+                            .show();
+                }
+            }
+
+        });
     }
 
     @Override
@@ -106,6 +141,150 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         });
     }
 //    response , request
+
+    private void Login (final String username, final String password) {
+        String urlSuffix = "";
+        class RegisterUser extends AsyncTask<String, Void, String> {
+
+            ProgressDialog loading;
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                loading = ProgressDialog.show(LoginActivity.this, "Please Wait",null, true, true);
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                loading.dismiss();
+                //ini notif dari server
+
+                JSONObject jsonResponse;
+                String status = "";
+                String userid = "";
+                String name = "";
+                try {
+
+                    jsonResponse = new JSONObject(s);
+//                    JSONArray jStatus = jsonResponse.getJSONArray("status");
+                    //                  JSONArray jUserid = jsonResponse.getJSONArray("userid");
+
+                    status = jsonResponse.getString("status");
+                    userid = jsonResponse.getString("user_id");
+                    name = jsonResponse.getString("first_name");
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+                if (status.equals("true")){
+                    Intent intent = new Intent(LoginActivity.this,
+                            Home.class);
+                   // intent.putExtra("USERID", userid);
+                   // intent.putExtra("USERTYPE", usertype);
+                    startActivity(intent);
+
+                    //Untuk Save Login State
+                    SharedPreferences sharedPref = getSharedPreferences("data",MODE_PRIVATE);
+                    SharedPreferences.Editor prefEditor = sharedPref.edit();
+                    prefEditor.putInt("isLogged",1);
+                   // prefEditor.putString("USERID", userid);
+                    // prefEditor.putString("USERTYPE", usertype);
+                    prefEditor.commit();
+
+                    finish();
+                } else {
+                    Toast.makeText(getApplicationContext(), status, Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            protected String doInBackground(String... params) {
+                String s = params[0];
+                BufferedReader bufferedReader = null;
+                try{
+                    URL url = new URL("https://internal.yisc-alazhar.or.id/api/members/login");
+                    JSONObject postDataParams = new JSONObject();
+
+                    String key = "wkkssks0g88sss004wko08ok44kkw80osss40gkc";
+                    postDataParams.put("key", key);
+                    postDataParams.put("email", username);
+                    postDataParams.put("password", password);
+                    Log.e("params",postDataParams.toString());
+
+                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                    conn.setReadTimeout(15000 /* milliseconds */);
+                    conn.setConnectTimeout(15000 /* milliseconds */);
+                    conn.setRequestMethod("POST");
+                    conn.setDoInput(true);
+                    conn.setDoOutput(true);
+
+                    OutputStream os = conn.getOutputStream();
+                    BufferedWriter writer = new BufferedWriter(
+                            new OutputStreamWriter(os, "UTF-8"));
+                    writer.write(getPostDataString(postDataParams));
+
+                    writer.flush();
+                    writer.close();
+                    os.close();
+
+                    int responseCode=conn.getResponseCode();
+
+                    if (responseCode == HttpsURLConnection.HTTP_OK) {
+
+                        BufferedReader in=new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                        StringBuffer sb = new StringBuffer("");
+                        String line="";
+
+                        while((line = in.readLine()) != null) {
+
+                            sb.append(line);
+                            break;
+                        }
+
+                        in.close();
+                        return sb.toString();
+
+                    }
+                    else {
+                        return new String("false : "+responseCode);
+                    }
+                }
+                catch(Exception e){
+                    return new String("Exception: " + e.getMessage());
+                }
+            }
+        }
+
+        RegisterUser ru = new RegisterUser();
+        ru.execute(urlSuffix);
+
+    }
+    public String getPostDataString(JSONObject params) throws Exception {
+
+        StringBuilder result = new StringBuilder();
+        boolean first = true;
+
+        Iterator<String> itr = params.keys();
+
+        while(itr.hasNext()){
+
+            String key= itr.next();
+            Object value = params.get(key);
+
+            if (first)
+                first = false;
+            else
+                result.append("&");
+
+            result.append(URLEncoder.encode(key, "UTF-8"));
+            result.append("=");
+            result.append(URLEncoder.encode(value.toString(), "UTF-8"));
+
+        }
+        return result.toString();
+    }
 
     private void login(String key, String email, String password) {
         //login
