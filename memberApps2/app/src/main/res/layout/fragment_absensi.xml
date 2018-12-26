@@ -6,16 +6,10 @@
     android:background="#fff">
 
     <!-- TODO: Update blank fragment layout -->
-    <!--<ListView-->
-        <!--android:id="@+id/listView3"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content">-->
-    <!--</ListView>-->
-    <Button
-        android:id="@+id/btnshowqr"
+    <ListView
+        android:id="@+id/listView3"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Scan QR"
-        android:textStyle="bold" />
+        android:layout_height="wrap_content">
+    </ListView>
 
 </RelativeLayout>
