@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import adapter.HomeAdapter;
@@ -46,11 +47,11 @@ public class Fragment_home extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-//        pDialog = new ProgressDialog(getActivity());
-//        pDialog.setMessage("Loading Data.. Please wait...");
-//        pDialog.setIndeterminate(false);
-//        pDialog.setCancelable(false);
-//        pDialog.show();
+        pDialog = new ProgressDialog(getActivity());
+        pDialog.setMessage("Loading Data.. Please wait...");
+        pDialog.setIndeterminate(false);
+        pDialog.setCancelable(false);
+        pDialog.show();
 //
 //        artikel("1");
         implementScrollListener();
@@ -59,24 +60,44 @@ public class Fragment_home extends Fragment {
 
     private void implementScrollListener() {
         Log.i("masuk", "masuk onscroll");
-        lv = (ListView) getView().findViewById(R.id.listView1);
+        lv = (ListView) getActivity().findViewById(R.id.listView1);
         lv.setOnScrollListener(new AbsListView.OnScrollListener() {
+            private int currentVisibleItemCount;
+            private int currentScrollState;
+            private int currentFirstVisibleItem;
+            private int totalItem;
+            private LinearLayout lBelow;
+
             @Override
-            public void onScrollStateChanged(AbsListView view, int scrollState) {}
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+                this.currentScrollState = scrollState;
+                this.isScrollCompleted();
+            }
 
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                this.currentFirstVisibleItem = firstVisibleItem;
+                this.currentVisibleItemCount = visibleItemCount;
+                this.totalItem = totalItemCount;
+
                 int lastInScreen = firstVisibleItem + visibleItemCount;
                 if ((lastInScreen == totalItemCount - 1) && load > 1) {
                     loadMore = true;
                     loadData();
                 }
             }
+
+            private void isScrollCompleted() {
+                if (totalItem - currentFirstVisibleItem == currentVisibleItemCount
+                        && this.currentScrollState == SCROLL_STATE_IDLE) {
+
+                }
+            }
         });
     }
 
     private void loadData() {
-        Log.i("masuk","loadData");
+        Log.i("masuk", "loadData");
         pDialog = new ProgressDialog(getActivity());
         pDialog.setMessage("Loading Data.. Please wait...");
         pDialog.setIndeterminate(false);

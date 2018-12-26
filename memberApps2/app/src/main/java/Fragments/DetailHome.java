@@ -13,20 +13,21 @@ import com.memberapps2.R;
 
 public class DetailHome extends Fragment {
     WebView webView;
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
 
-        View view=inflater.inflate(R.layout. fragment_detail_home, container, false);
-         webView = (WebView) view.findViewById(R.id.webview);
-        Bundle b = getArguments();
-        String url = b.getString("url");
-         goToUrl(url);
-        return view;
-    }
+//    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+//                             Bundle savedInstanceState) {
 
-    public void goToUrl(String url){
+//        View view = inflater.inflate(R.layout.fragment_detail_home, container, false);
+//         webView = (WebView) view.findViewById(R.id.webview);
+//        Bundle b = getArguments();
+//        String url = b.getString("url");
+//        goToUrl(url);
+//        return view;
+//    }
 
-        webView.loadUrl("http://yisc-alazhar.or.id/?p="+url);
+    public void goToUrl(String url) {
+
+        webView.loadUrl("http://yisc-alazhar.or.id/?p=" + url);
 
         // Enable Javascript
         WebSettings webSettings = webView.getSettings();

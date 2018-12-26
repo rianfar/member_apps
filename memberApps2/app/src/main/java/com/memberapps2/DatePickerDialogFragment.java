@@ -33,7 +33,7 @@ public class DatePickerDialogFragment extends DialogFragment implements DatePick
 
     public void onDateSet(DatePicker view, int year, int month, int day) {
         // Do something with the chosen date
-        TextView tv = (TextView) getActivity().findViewById(R.id.txttgllahir);
+//        TextView tv = (TextView) getActivity().findViewById(R.id.txttgllahir);
 
         // Create a Date variable/object with user chosen date
         Calendar cal = Calendar.getInstance();
@@ -46,7 +46,7 @@ public class DatePickerDialogFragment extends DialogFragment implements DatePick
         String formattedDate = df.format(chosenDate);
 
         // Display the chosen date to app interface
-        tv.setText(formattedDate);
+//        tv.setText(formattedDate);
     }
 }
 
