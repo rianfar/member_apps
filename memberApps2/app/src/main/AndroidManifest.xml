@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".WelcomeActivity"
+            android:name=".Home"
             android:label="YISC Al Azhar"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -24,7 +24,7 @@
         <activity android:name=".LoginActivity"
             android:label="YISC Al Azhar"
             android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".Home"
+        <activity android:name=".WelcomeActivity"
             android:label="YISC Al Azhar"
             android:theme="@style/AppTheme.NoActionBar"/>
 
