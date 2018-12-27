@@ -90,7 +90,7 @@ public class Fragment_home extends Fragment {
                         }
                         artikels.add(new Datum(name, post_title, post_date, post_url, post_picture));
                         homeAdapter = new HomeAdapter(getActivity().getApplicationContext(), artikels);
-                        lv = (ListView) getView().findViewById(R.id.listView1);
+//                        lv = (ListView) getView().findViewById(R.id.listView1);
                         lv.setAdapter(homeAdapter);
                         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 

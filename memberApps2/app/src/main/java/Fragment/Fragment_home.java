@@ -13,6 +13,7 @@ import android.widget.AbsListView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import adapter.HomeAdapter;
 import connection.LoginAPI;
@@ -29,9 +30,11 @@ import com.memberapps2.R;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeoutException;
 
 public class Fragment_home extends Fragment {
     ListView lv;
+
     ProgressDialog pDialog;
     final ArrayList<Datum> artikels = new ArrayList<>();
     HomeAdapter homeAdapter;
@@ -47,53 +50,30 @@ public class Fragment_home extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        pDialog = new ProgressDialog(getActivity());
-        pDialog.setMessage("Loading Data.. Please wait...");
-        pDialog.setIndeterminate(false);
-        pDialog.setCancelable(false);
-        pDialog.show();
-//
-//        artikel("1");
-        implementScrollListener();
-        return view;
-    }
-
-    private void implementScrollListener() {
-        Log.i("masuk", "masuk onscroll");
-        lv = (ListView) getActivity().findViewById(R.id.listView1);
+        lv = (ListView) view.findViewById(R.id.listView1);
+        homeAdapter = new HomeAdapter(getActivity().getApplicationContext(), artikels);
+        lv.setAdapter(homeAdapter);
         lv.setOnScrollListener(new AbsListView.OnScrollListener() {
-            private int currentVisibleItemCount;
-            private int currentScrollState;
-            private int currentFirstVisibleItem;
-            private int totalItem;
-            private LinearLayout lBelow;
-
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
-                this.currentScrollState = scrollState;
-                this.isScrollCompleted();
             }
 
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-                this.currentFirstVisibleItem = firstVisibleItem;
-                this.currentVisibleItemCount = visibleItemCount;
-                this.totalItem = totalItemCount;
-
                 int lastInScreen = firstVisibleItem + visibleItemCount;
                 if ((lastInScreen == totalItemCount - 1) && load > 1) {
                     loadMore = true;
                     loadData();
                 }
             }
-
-            private void isScrollCompleted() {
-                if (totalItem - currentFirstVisibleItem == currentVisibleItemCount
-                        && this.currentScrollState == SCROLL_STATE_IDLE) {
-
-                }
-            }
         });
+
+//        homeAdapter = new HomeAdapter(getActivity().getApplicationContext(), artikels);
+//        lv = (ListView) getView().findViewById(R.id.listView1);
+//        lv.setAdapter(homeAdapter);
+
+        loadData();
+        return view;
     }
 
     private void loadData() {
@@ -142,10 +122,11 @@ public class Fragment_home extends Fragment {
 //                            sb.append(name);
                         }
                         artikels.add(new Datum(name, post_title, post_date, post_url, post_picture));
-                        homeAdapter = new HomeAdapter(getActivity().getApplicationContext(), artikels);
-                        lv = (ListView) getView().findViewById(R.id.listView1);
-                        lv.setAdapter(homeAdapter);
+                        //homeAdapter = new HomeAdapter(getActivity().getApplicationContext(), artikels);
+                        //lv = (ListView) getView().findViewById(R.id.listView1);
+                        //lv.setAdapter(homeAdapter);
                     }
+                    homeAdapter.notifyDataSetChanged();
                 }
             }
 
