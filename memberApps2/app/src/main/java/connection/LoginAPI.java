@@ -4,6 +4,7 @@ package connection;
 
 import android.util.Log;
 
+import datasource.remote.NewsFeedResponse;
 import model.Artikel;
 import model.UserList;
 import model.UserLogin;
@@ -44,5 +45,8 @@ public interface LoginAPI {
         @Query(value = "member_pinbb") String member_pinbb, @Query(value = "member_job") Integer member_job,
         @Query(value = "member_jabatan") String member_jabatan, @Query(value = "member_office_address") String member_office_address,
         @Query(value = "member_office_telp") String member_office_telp, @Query(value = "member_angkatan") String member_angkatan);
+
+    @GET("api/articles/index/")
+    Call<NewsFeedResponse> getNewsFeed();
 }
 
