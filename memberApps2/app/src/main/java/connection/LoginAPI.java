@@ -4,7 +4,6 @@ package connection;
 
 import android.util.Log;
 
-import datasource.remote.NewsFeedResponse;
 import model.Artikel;
 import model.UserList;
 import model.UserLogin;
@@ -32,6 +31,10 @@ public interface LoginAPI {
     @GET("api/articles/index/{page}")
     Call<Artikel> responseArtikel(@Query(value = "page") String page);
 
+    @GET("api/articles/categories/{page}")
+    Call<Artikel> responsCategory(@Query(value = "page") String page,@Query(value = "category") String category);
+
+
     @GET("api/members/update/{key}/{id}/{member_no}/{member_name}/{member_nickname}/{member_gender}/{member_blood}/" +
             "{member_pob}/{member_dob}/{member_hoby}/{member_alamat}/{member_kota}/{member_poscode}/{member_telp}/" +
             "{member_hp}/{member_pinbb}/{member_job}/{member_jabatan}/{member_office_address}/{member_office_telp}/{member_angkatan}")
@@ -46,7 +49,5 @@ public interface LoginAPI {
         @Query(value = "member_jabatan") String member_jabatan, @Query(value = "member_office_address") String member_office_address,
         @Query(value = "member_office_telp") String member_office_telp, @Query(value = "member_angkatan") String member_angkatan);
 
-    @GET("api/articles/index/")
-    Call<NewsFeedResponse> getNewsFeed();
 }
 

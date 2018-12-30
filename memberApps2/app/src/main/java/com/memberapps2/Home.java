@@ -1,5 +1,6 @@
 package com.memberapps2;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -11,10 +12,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import Fragment.Berita;
 import Fragment.Fragment_home;
+import Fragment.NewsFeedFragment;
 import Fragment.Pendaftaran;
 import Fragment.Pendidikan;
 import Fragment.Pesan;
@@ -23,7 +26,7 @@ import Fragment.Profile;
 public class Home extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     Toolbar toolbar;
-
+    TextView txtNama;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +61,10 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+        txtNama = (TextView)findViewById(R.id.txtnama);
+        SharedPreferences sharedPref = getSharedPreferences("data",MODE_PRIVATE);
+        String name = sharedPref.getString("name", "");
+        txtNama.setText(name);
         return true;
     }
 
@@ -82,7 +89,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         //initializing the fragment object which is selected
         switch (itemId) {
             case R.id.nav_home:
-                fragment = new Fragment_home();
+                fragment = new NewsFeedFragment();
                 toolbar.setTitle("YISC AL AZHAR");
                 break;
             case R.id.nav_profil:
