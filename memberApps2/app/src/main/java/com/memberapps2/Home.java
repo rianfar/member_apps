@@ -19,6 +19,7 @@ import Fragment.Pendaftaran;
 import Fragment.Pendidikan;
 import Fragment.Pesan;
 import Fragment.Profile;
+import Fragment.Kajian;
 
 public class Home extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -104,6 +105,10 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
             case R.id.nav_berita:
                 fragment = new Berita();
                 toolbar.setTitle("Berita");
+                break;
+            case R.id.nav_kajian:
+                fragment = new Kajian();
+                toolbar.setTitle("Kajian");
                 break;
         }
 

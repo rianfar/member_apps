@@ -19,7 +19,7 @@ import java.util.List;
 import adapter.HomeAdapter;
 import adapter.NewsFeedAdapter;
 import connection.LoginAPI;
-import datasource.remote.NewsFeedResponse;
+//import datasource.remote.NewsFeedResponse;
 import entity.NewsFeedCategory;
 import entity.NewsFeedData;
 import helper.RetroClient;
@@ -48,20 +48,20 @@ public class NewsFeedFragment extends Fragment {
 
 
     public void newsFeed(){
-        RetroClient.getClient().create(LoginAPI.class).getNewsFeed().enqueue(new Callback<NewsFeedResponse>() {
-            @Override
-            public void onResponse(Call<NewsFeedResponse> call, Response<NewsFeedResponse> response) {
-                if(response.isSuccessful()){
-                    Gson gson = new Gson();
-                    String data = gson.toJson(response.body());
-                    Log.i("responseartikel", data);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<NewsFeedResponse> call, Throwable t) {
-
-            }
-        });
+//        RetroClient.getClient().create(LoginAPI.class).getNewsFeed().enqueue(new Callback<NewsFeedResponse>() {
+//            @Override
+//            public void onResponse(Call<NewsFeedResponse> call, Response<NewsFeedResponse> response) {
+//                if(response.isSuccessful()){
+//                    Gson gson = new Gson();
+//                    String data = gson.toJson(response.body());
+//                    Log.i("responseartikel", data);
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<NewsFeedResponse> call, Throwable t) {
+//
+//            }
+//        });
     }
 }
