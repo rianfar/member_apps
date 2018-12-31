@@ -68,16 +68,24 @@ public class Biodata extends Fragment {
 //        calender();
 
         // Inflate the layout for this fragment
-        pDialog = new ProgressDialog(getActivity());
-        pDialog.setMessage("Loading Data.. Please wait...");
-        pDialog.setIndeterminate(false);
-        pDialog.setCancelable(false);
-        pDialog.show();
+//        pDialog = new ProgressDialog(getActivity());
+//        pDialog.setMessage("Loading Data.. Please wait...");
+//        pDialog.setIndeterminate(false);
+//        pDialog.setCancelable(false);
+//        pDialog.show();
 
         SharedPreferences sharedPref = getActivity().getSharedPreferences("data",MODE_PRIVATE);
         String id = sharedPref.getString("id", "");
+        String nama = sharedPref.getString("name","");
+        String email = sharedPref.getString("email","");
+        String phone = sharedPref.getString("phone","");
 
-        getMember("wkkssks0g88sss004wko08ok44kkw80osss40gkc", id);
+        txtnama.setText(nama);
+        txtId.setText(id);
+        txthp.setText(phone);
+        txtemail.setText(email);
+
+//        getMember("wkkssks0g88sss004wko08ok44kkw80osss40gkc", id);
         return v;
     }
 

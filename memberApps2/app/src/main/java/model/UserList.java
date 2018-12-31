@@ -100,6 +100,10 @@ public class UserList {
         public String getFirst_name() {
             return first_name;
         }
+
+        public String getPhone() {
+            return phone;
+        }
     }
 }
 

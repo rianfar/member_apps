@@ -117,11 +117,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     if (response.body().data.getUser_id() != null ) {
                         String name = response.body().data.getFirst_name();
                         String userId = response.body().data.getUser_id();
+                        String email = response.body().data.getUsername();
+                        String phone = response.body().data.getPhone();
                         SharedPreferences sharedPref = getSharedPreferences("data",MODE_PRIVATE);
                         SharedPreferences.Editor prefEditor = sharedPref.edit();
                         prefEditor.putInt("isLogged",1);
                         prefEditor.putString("name",name);
                         prefEditor.putString("id",userId);
+                        prefEditor.putString("email",email);
+                        prefEditor.putString("phone",phone);
                         prefEditor.commit();
                         Intent inten = new Intent(LoginActivity.this, Home.class);
                         startActivity(inten);
