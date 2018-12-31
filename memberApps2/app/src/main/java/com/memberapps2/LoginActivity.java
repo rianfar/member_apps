@@ -72,27 +72,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         Button btnLogin = (Button) findViewById(R.id.btnlogin);
         btnLogin.setOnClickListener(this);
 
-//        // Login button Click Event
-//        btnLogin.setOnClickListener(new View.OnClickListener() {
-//
-//            public void onClick(View view) {
-//                String email = txtusername.getText().toString().trim();
-//                String password = txtpassword.getText().toString().trim();
-//
-//                // Check for empty data in the form
-//                if (!email.isEmpty() && !password.isEmpty()) {
-//                    // login user
-////                    Login(email, password);
-//
-//                } else {
-//                    // Prompt user to enter credentials
-//                    Toast.makeText(getApplicationContext(),
-//                            "Silahkan Masukan Email dan Password Anda!", Toast.LENGTH_LONG)
-//                            .show();
-//                }
-//            }
-//
-//        });
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        System.exit(0);
+        finish();
     }
 
     @Override
@@ -108,188 +95,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         String password = txtpassword.getText().toString();
 
         login("wkkssks0g88sss004wko08ok44kkw80osss40gkc", email, password);
-//        member("wkkssks0g88sss004wko08ok44kkw80osss40gkc", email);
-//        member();
 
     }
 
-    private void member(String key, String user_id) {
-        RetroClient.getClient().create(LoginAPI.class).responseMember(key, user_id).enqueue(new Callback<UserMember>() {
-            @Override
-            public void onResponse(Call<UserMember> call, Response<UserMember> response) {
-                if (response.isSuccessful()) {
-                    pDialog.dismiss();
-                    Gson gson = new Gson();
-                    String j = gson.toJson(response.body());
-
-                    Log.i("response", j);
-                    Log.i("response2", response.raw().request().url().toString());
-                    Log.i("response3", response.body().getData().getId());
-                    Log.i("response4", response.body().getStatus().toString());
-                    String name = response.body().getData().getMemberName();
-                    SharedPreferences sharedPref = getSharedPreferences("data",MODE_PRIVATE);
-                    SharedPreferences.Editor prefEditor = sharedPref.edit();
-                    prefEditor.putInt("isLogged",1);
-                    prefEditor.putString("name",name);
-                    prefEditor.commit();
-                    if (response.body().getStatus() == true) {
-                        Intent inten = new Intent(LoginActivity.this, Home.class);
-                        startActivity(inten);
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<UserMember> call, Throwable throwable) {
-
-            }
-        });
-    }
-//    response , request
-
-//    private void Login (final String username, final String password) {
-//        String urlSuffix = "";
-//        class RegisterUser extends AsyncTask<String, Void, String> {
-//
-//            ProgressDialog loading;
-//            @Override
-//            protected void onPreExecute() {
-//                super.onPreExecute();
-//                loading = ProgressDialog.show(LoginActivity.this, "Please Wait",null, true, true);
-//            }
-//
-//            @Override
-//            protected void onPostExecute(String s) {
-//                super.onPostExecute(s);
-//                loading.dismiss();
-//                //ini notif dari server
-//
-//                JSONObject jsonResponse;
-//                String status = "";
-//                String userid = "";
-//                String name = "";
-//                try {
-//
-//                    jsonResponse = new JSONObject(s);
-////                    JSONArray jStatus = jsonResponse.getJSONArray("status");
-//                    //                  JSONArray jUserid = jsonResponse.getJSONArray("userid");
-//
-//                    status = jsonResponse.getString("status");
-//                    userid = jsonResponse.getString("user_id");
-//                    name = jsonResponse.getString("first_name");
-//
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//
-//
-//                if (status.equals("true")){
-//                    Intent intent = new Intent(LoginActivity.this,
-//                            Home.class);
-//                   // intent.putExtra("USERID", userid);
-//                   // intent.putExtra("USERTYPE", usertype);
-//                    startActivity(intent);
-//
-//                    //Untuk Save Login State
-//                    SharedPreferences sharedPref = getSharedPreferences("data",MODE_PRIVATE);
-//                    SharedPreferences.Editor prefEditor = sharedPref.edit();
-//                    prefEditor.putInt("isLogged",1);
-//                   // prefEditor.putString("USERID", userid);
-//                    // prefEditor.putString("USERTYPE", usertype);
-//                    prefEditor.commit();
-//
-//                    finish();
-//                } else {
-//                    Toast.makeText(getApplicationContext(), status, Toast.LENGTH_LONG).show();
-//                }
-//            }
-//
-//            @Override
-//            protected String doInBackground(String... params) {
-//                String s = params[0];
-//                BufferedReader bufferedReader = null;
-//                try{
-//                    URL url = new URL("https://internal.yisc-alazhar.or.id/api/members/login");
-//                    JSONObject postDataParams = new JSONObject();
-//
-//                    String key = "wkkssks0g88sss004wko08ok44kkw80osss40gkc";
-//                    postDataParams.put("key", key);
-//                    postDataParams.put("email", username);
-//                    postDataParams.put("password", password);
-//                    Log.e("params",postDataParams.toString());
-//
-//                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-//                    conn.setReadTimeout(15000 /* milliseconds */);
-//                    conn.setConnectTimeout(15000 /* milliseconds */);
-//                    conn.setRequestMethod("POST");
-//                    conn.setDoInput(true);
-//                    conn.setDoOutput(true);
-//
-//                    OutputStream os = conn.getOutputStream();
-//                    BufferedWriter writer = new BufferedWriter(
-//                            new OutputStreamWriter(os, "UTF-8"));
-//                    writer.write(getPostDataString(postDataParams));
-//
-//                    writer.flush();
-//                    writer.close();
-//                    os.close();
-//
-//                    int responseCode=conn.getResponseCode();
-//
-//                    if (responseCode == HttpsURLConnection.HTTP_OK) {
-//
-//                        BufferedReader in=new BufferedReader(new InputStreamReader(conn.getInputStream()));
-//                        StringBuffer sb = new StringBuffer("");
-//                        String line="";
-//
-//                        while((line = in.readLine()) != null) {
-//
-//                            sb.append(line);
-//                            break;
-//                        }
-//
-//                        in.close();
-//                        return sb.toString();
-//
-//                    }
-//                    else {
-//                        return new String("false : "+responseCode);
-//                    }
-//                }
-//                catch(Exception e){
-//                    return new String("Exception: " + e.getMessage());
-//                }
-//            }
-//        }
-//
-//        RegisterUser ru = new RegisterUser();
-//        ru.execute(urlSuffix);
-//
-//    }
-//    public String getPostDataString(JSONObject params) throws Exception {
-//
-//        StringBuilder result = new StringBuilder();
-//        boolean first = true;
-//
-//        Iterator<String> itr = params.keys();
-//
-//        while(itr.hasNext()){
-//
-//            String key= itr.next();
-//            Object value = params.get(key);
-//
-//            if (first)
-//                first = false;
-//            else
-//                result.append("&");
-//
-//            result.append(URLEncoder.encode(key, "UTF-8"));
-//            result.append("=");
-//            result.append(URLEncoder.encode(value.toString(), "UTF-8"));
-//
-//        }
-//        return result.toString();
-//    }
 
     private void login(String key, String email, String password) {
         //login
@@ -306,10 +114,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     Log.i("response",j);
                     Log.i("response2", response.raw().request().url().toString());
                     pDialog.dismiss();
-                    UserList list = response.body();
-                    list.data.getUser_id();
-                    if (list.status == true) {
-
+                    if (response.body().data.getUser_id() != null ) {
+                        String name = response.body().data.getFirst_name();
+                        SharedPreferences sharedPref = getSharedPreferences("data",MODE_PRIVATE);
+                        SharedPreferences.Editor prefEditor = sharedPref.edit();
+                        prefEditor.putInt("isLogged",1);
+                        prefEditor.putString("name",name);
+                        prefEditor.commit();
                         Intent inten = new Intent(LoginActivity.this, Home.class);
                         startActivity(inten);
                     }
@@ -323,98 +134,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             }
         });
-//        TestRequestBean testRequestBean = new TestRequestBean();
-//        testRequestBean.setPages(2);
-//        testRequestBean.setUserId(2);
-//        retrofit.create(ITestRetrofit.class).testOperation(testRequestBean).enqueue(new Callback<TestEntity>() {
-//            @Override
-//            public void onResponse(Call<TestEntity> call, Response<TestEntity> response) {
-//                // response
-//            }
-//
-//            @Override
-//            public void onFailure(Call<TestEntity> call, Throwable t) {
-//
-//            }
-//        });
+
     }
 
 
-//    private void login(String key,String email, String password) {
-//        final UserLogin login = new UserLogin(key,password, password);
-//        Call<UserLogin> call1 = api.loginUser(login);
-//        call1.enqueue(new Callback<UserLogin>() {
-//            @Override
-//            public void onResponse(Call<UserLogin> call, Response<UserLogin> response) {
-//                UserLogin loginResponse = response.body();
-//
-//                Log.e("keshav", "loginResponse 1 --> " + loginResponse);
-//                if (loginResponse != null) {
-////                    Log.e("keshav", "getEmail       -->  " + loginResponse.getEmail());
-////                    Log.e("keshav", "getMessage    -->  " + loginResponse.getMessage());
-////                    Log.e("keshav", "getStatus       -->  " + loginResponse.getStatus());
-////                    Log.e("keshav", "getuserID  -->  " + loginResponse.getUser_id());
-////
-////                    Boolean responseCode = loginResponse.getStatus();
-////                    Log.e("keshav", "getResponseCode  -->  " + loginResponse.getStatus());
-////                    Log.e("keshav", "getResponseMessage  -->  " + loginResponse.getMessage());
-////                    if (responseCode==true) {
-////                        pDialog.dismiss();
-////                        Intent intent = new Intent(LoginActivity.this, Home.class);
-////                    startActivity(intent);
-////                    } else {
-////                        pDialog.dismiss();
-////                        Toast.makeText(LoginActivity.this, "WRONG PASSWORD", Toast.LENGTH_SHORT).show();
-////                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<UserLogin> call, Throwable t) {
-//                Toast.makeText(getApplicationContext(), "onFailure called ", Toast.LENGTH_SHORT).show();
-//                call.cancel();
-//            }
-//        });
-//    }
-
 
 }
-
-//    private void login(String key, String email, String password) {
-//        UserLogin userLogin = new UserLogin(key,email, password);
-//        MainApplication.retroClient.loginUser(userLogin, new Callback<UserLogin>() {
-//            @Override
-//            public void onResponse(Call<UserLogin> call, Response<UserLogin> response) {
-//                pDialog.dismiss();
-//                UserLogin responseUser = response.body();
-//
-//                if (response.isSuccessful() && responseUser != null) {
-//                    Toast.makeText(LoginActivity.this,
-//                            String.format("YISC",
-//                                    responseUser.getMessage(),
-//                                    responseUser.getStatus(),
-//                                    responseUser.getKey(),
-//                                    responseUser.getEmail(),
-//                                    responseUser.getPassword(),
-//                                    responseUser.getUser_id()),
-//                            Toast.LENGTH_LONG)
-//                            .show();
-//                    Intent intent = new Intent(LoginActivity.this, Home.class);
-//                    startActivity(intent);
-//                } else {
-//                    Toast.makeText(LoginActivity.this,
-//                            String.format("Response YISC", String.valueOf(response.code()))
-//                            , Toast.LENGTH_LONG).show();
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<UserLogin> call, Throwable t) {
-//                pDialog.dismiss();
-//                Toast.makeText(LoginActivity.this,
-//                        "Error is " + t.getMessage()
-//                        , Toast.LENGTH_LONG).show();
-//            }
-//        });
-//    }
 

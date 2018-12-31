@@ -7,24 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserList {
-//   "id": "8",
-//           "ip_address": "182.253.179.167",
-//           "username": "",
-//           "password": "$2y$08$o.xZMrl..KkSuKuKmx7qHuBnG0l/e2pmbkLAD1Uzg4W2pL3pIXy5m",
-//           "salt": null,
-//           "email": "rienditya@gmail.com",
-//           "activation_code": null,
-//           "forgotten_password_code": null,
-//           "forgotten_password_time": null,
-//           "remember_code": null,
-//           "created_on": "1533174826",
-//           "last_login": "1533698636",
-//           "active": "1",
-//           "first_name": "Rienditya Saka Firmansyah",
-//           "last_name": null,
-//           "company": null,
-//           "phone": null,
-//           "user_id": "8"
+
    public boolean status;
    public UserListChild data;
 
@@ -108,6 +91,14 @@ public class UserList {
 
         public String getUser_id() {
             return user_id;
+        }
+
+        public String getUsername() {
+            return username;
+        }
+
+        public String getFirst_name() {
+            return first_name;
         }
     }
 }

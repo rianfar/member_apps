@@ -1,9 +1,11 @@
 package com.memberapps2;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -12,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +31,9 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 
     Toolbar toolbar;
     TextView txtNama;
+
+    FragmentManager fragmentManager;
+    FragmentTransaction fragmentTransaction;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +51,12 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        View header = navigationView.inflateHeaderView(R.layout.nav_header_main);
+        txtNama = (TextView)header.findViewById(R.id.txtnama);
+        SharedPreferences sharedPref = getSharedPreferences("data",MODE_PRIVATE);
+        String name = sharedPref.getString("name", "");
+        if(name!=""){
+        txtNama.setText(name);}
     }
 
     @Override
@@ -62,10 +74,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
-        txtNama = (TextView)findViewById(R.id.txtnama);
-        SharedPreferences sharedPref = getSharedPreferences("data",MODE_PRIVATE);
-        String name = sharedPref.getString("name", "");
-        txtNama.setText(name);
+
         return true;
     }
 
@@ -117,6 +126,15 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 fragment = new Kajian();
                 toolbar.setTitle("Kajian");
                 break;
+            case R.id.nav_logout:
+                SharedPreferences sharedPref = getSharedPreferences("data",MODE_PRIVATE);
+                SharedPreferences.Editor prefEditor = sharedPref.edit();
+                prefEditor.putInt("isLogged",0);
+                 prefEditor.commit();
+                Intent i = new Intent(this, WelcomeActivity.class);
+                startActivity(i);
+                break;
+
         }
 
         //replacing the fragment
@@ -138,4 +156,6 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         displaySelectedScreen(id);
         return true;
     }
+
+    
 }
