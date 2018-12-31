@@ -116,10 +116,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     pDialog.dismiss();
                     if (response.body().data.getUser_id() != null ) {
                         String name = response.body().data.getFirst_name();
+                        String userId = response.body().data.getUser_id();
                         SharedPreferences sharedPref = getSharedPreferences("data",MODE_PRIVATE);
                         SharedPreferences.Editor prefEditor = sharedPref.edit();
                         prefEditor.putInt("isLogged",1);
                         prefEditor.putString("name",name);
+                        prefEditor.putString("id",userId);
                         prefEditor.commit();
                         Intent inten = new Intent(LoginActivity.this, Home.class);
                         startActivity(inten);
