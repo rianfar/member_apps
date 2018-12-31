@@ -1,24 +1,21 @@
 package helper;
 
 import connection.LoginAPI;
-import model.UserLogin;
-import retrofit2.Call;
-import retrofit2.Callback;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class RetroClient {
+public class RetroClientYoutube {
     /********
      * URLS
      *******/
 
-    private static final String ROOT_URL = "https://internal.yisc-alazhar.or.id/";
+    private static final String ROOT_URL = "https://www.googleapis.com/youtube/v3/";
 
     private static LoginAPI service;
-    private static RetroClient retroClient;
+    private static RetroClientYoutube retroClientYoutube;
     public static Retrofit retrofit;
 
-    private RetroClient() {
+    private RetroClientYoutube() {
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(ROOT_URL)
@@ -37,11 +34,11 @@ public class RetroClient {
         return retrofit;
     }
 
-    public static RetroClient getInstance() {
-        if (retroClient == null) {
-            retroClient = new RetroClient();
+    public static RetroClientYoutube getInstance() {
+        if (retroClientYoutube == null) {
+            retroClientYoutube = new RetroClientYoutube();
         }
-        return retroClient;
+        return retroClientYoutube;
     }
 
 

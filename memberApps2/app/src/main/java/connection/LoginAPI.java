@@ -52,8 +52,8 @@ public interface LoginAPI {
         @Query(value = "member_jabatan") String member_jabatan, @Query(value = "member_office_address") String member_office_address,
         @Query(value = "member_office_telp") String member_office_telp, @Query(value = "member_angkatan") String member_angkatan);
 
-    @GET("https://www.googleapis.com/youtube/v3/search/{part}/{channelId}/{key}")
-    Call<Kajian> responseVideo(@Query(value = "part") String part, @Query(value = "channelId") String channelId, @Query(value = "key") String key);
+    @GET("search/{part}/{channelId}/{key}")
+    Call<ResponseBody> responseVideo(@Query(value = "part") String part, @Query(value = "channelId") String channelId, @Query(value = "key") String key);
 
 //    @GET("api/articles/index/")
 //    Call<NewsFeedResponse> getNewsFeed();
