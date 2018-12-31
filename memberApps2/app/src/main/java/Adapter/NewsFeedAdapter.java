@@ -1,54 +1,62 @@
 package adapter;
 
-import android.content.Context;
-import android.graphics.Color;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 
-import com.memberapps2.R;
-import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
+import Fragment.Fragment_home;
+import Fragment.Events;
+import Fragment.Merchandise;
+import static Fragment.Profile.int_items;
 
-import entity.NewsFeedData;
-import model.Datum;
+public class NewsFeedAdapter extends FragmentPagerAdapter {
 
-public class NewsFeedAdapter extends ArrayAdapter<NewsFeedData> {
-    private Context context;
-    TextView name, post_title, post_date;
-    ImageView post_picture;
+    public NewsFeedAdapter(FragmentManager fm) {
+        super(fm);
+    }
 
-    public NewsFeedAdapter(Context context, ArrayList<NewsFeedData> newsFeedAdapter) {
-        super(context, 0, newsFeedAdapter);
-        this.context = context;
+    /**
+     * Return fragment with respect to Position .
+     */
+
+    @Override
+    public Fragment getItem(int position) {
+        switch (position) {
+            case 0:
+                Fragment_home tab1 = new Fragment_home();
+                return tab1;
+            case 1:
+                Events tab2 = new Events();
+                return tab2;
+            case 2:
+                Merchandise tab3 = new Merchandise();
+                return tab3;
+        }
+        return null;
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        if (convertView == null) {
-            LayoutInflater layoutInflater = LayoutInflater.from(this.context);
-            convertView = layoutInflater.inflate(R.layout.mylist, null);
+    public int getCount() {
+
+        return int_items;
+
+    }
+
+    /**
+     * This method returns the title of the tab according to the position.
+     */
+
+    @Override
+    public CharSequence getPageTitle(int position) {
+        String namatab;
+        if (position==0){
+            namatab = "NewsFeed";
+        }else if (position==1){
+            namatab = "Events";
+        }else{
+            namatab = "Merchandise";
         }
-
-        NewsFeedData newsFeedData = getItem(position);
-        name = (TextView) convertView.findViewById(R.id.Itemname);
-        name.setText(newsFeedData.getName());
-        name.setTextColor(Color.BLACK);
-        post_title = (TextView) convertView.findViewById(R.id.Desc);
-        post_title.setText(newsFeedData.getPostTitle());
-        post_title.setTextColor(Color.BLACK);
-        post_date = (TextView) convertView.findViewById(R.id.Bidang);
-        post_date.setText(newsFeedData.getPostDate());
-        post_date.setTextColor(Color.BLACK);
-        post_picture = (ImageView) convertView.findViewById(R.id.imageNewsFeed);
-        Picasso.with(context)
-                .load(newsFeedData.getPostPicture().toString())
-                .into(post_picture);
-
-        return convertView;
+        return namatab;
     }
 }
