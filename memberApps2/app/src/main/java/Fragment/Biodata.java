@@ -2,6 +2,7 @@ package Fragment;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
@@ -31,6 +32,8 @@ import model.UserMember;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class Biodata extends Fragment {
     ProgressDialog pDialog;
@@ -71,7 +74,10 @@ public class Biodata extends Fragment {
         pDialog.setCancelable(false);
         pDialog.show();
 
-        getMember("wkkssks0g88sss004wko08ok44kkw80osss40gkc", "8");
+        SharedPreferences sharedPref = getActivity().getSharedPreferences("data",MODE_PRIVATE);
+        String id = sharedPref.getString("id", "");
+
+        getMember("wkkssks0g88sss004wko08ok44kkw80osss40gkc", id);
         return v;
     }
 
