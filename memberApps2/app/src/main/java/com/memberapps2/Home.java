@@ -118,10 +118,6 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 fragment = new Pendaftaran();
                 toolbar.setTitle("Pendaftaran");
                 break;
-            case R.id.nav_berita:
-                fragment = new Berita();
-                toolbar.setTitle("Berita");
-                break;
             case R.id.nav_kajian:
                 fragment = new Kajian();
                 toolbar.setTitle("Kajian");
