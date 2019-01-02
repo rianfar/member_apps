@@ -29,9 +29,6 @@ public class AdapterKajian extends FragmentPagerAdapter {
             case 1:
                 VideoKajian tab2 = new VideoKajian();
                 return tab2;
-            case 2:
-                ArtikelKajian tab3 = new ArtikelKajian();
-                return tab3;
         }
         return null;
     }
@@ -52,10 +49,8 @@ public class AdapterKajian extends FragmentPagerAdapter {
         String namatab;
         if (position==0){
             namatab = "Info";
-        }else if (position==1){
-            namatab = "Video";
         }else{
-            namatab = "Artikel";
+            namatab = "Video";
         }
         return namatab;
     }

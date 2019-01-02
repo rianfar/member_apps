@@ -7,6 +7,7 @@ import android.util.Log;
 //import datasource.remote.NewsFeedResponse;
 import Fragment.VideoKajian;
 import model.Artikel;
+import model.InfoKajian;
 import model.Kajian;
 import model.UserList;
 import model.UserLogin;
@@ -33,6 +34,9 @@ public interface LoginAPI {
 
     @GET("api/articles/index/{page}")
     Call<Artikel> responseArtikel(@Query(value = "page") String page);
+
+    @GET("api/articles/categories/{page}/{category}")
+    Call<InfoKajian> responseInfoKajian(@Query(value = "page") String page, @Query(value = "category") String category);
 
     @GET("api/articles/categories/{page}")
     Call<Artikel> responsCategory(@Query(value = "page") String page,@Query(value = "category") String category);
