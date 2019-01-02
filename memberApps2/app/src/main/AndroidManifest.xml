@@ -26,6 +26,9 @@
         <activity android:name=".Home"
             android:label="YISC Al Azhar"
             android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".VideoKajianActivity"
+            android:label="YISC Al Azhar"
+            android:theme="@style/AppTheme.NoActionBar"/>
 
     </application>
 
