@@ -9,7 +9,7 @@ public class RetroClientYoutube {
      * URLS
      *******/
 
-    private static final String ROOT_URL = "https://www.googleapis.com/youtube/v3/";
+    private static final String ROOT_URL = "https://www.googleapis.com/youtube/v3/search/";
 
     private static LoginAPI service;
     private static RetroClientYoutube retroClientYoutube;

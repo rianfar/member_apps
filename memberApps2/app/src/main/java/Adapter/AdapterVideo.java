@@ -3,6 +3,7 @@ package adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,10 +29,10 @@ import model.Kajian;
 
 public class AdapterVideo extends ArrayAdapter<Kajian> {
     private Context context;
-    TextView name, post_title, id;
     ImageView post_picture;
     private YouTubePlayerView playerView;
     private YouTubePlayer player;
+    ImageLoader imageLoader = AppController.getInstance().getImageLoader();
     public AdapterVideo(Context context, ArrayList<Kajian> adapterVideo) {
         super(context, 0, adapterVideo);
         this.context = context;
@@ -43,22 +44,22 @@ public class AdapterVideo extends ArrayAdapter<Kajian> {
             LayoutInflater layoutInflater = LayoutInflater.from(this.context);
             convertView = layoutInflater.inflate(R.layout.listvideo, null);
         }
-
-
         Kajian kajian = getItem(position);
         NetworkImageView networkImageView = (NetworkImageView) convertView.findViewById(R.id.video_image);
-        name = (TextView) convertView.findViewById(R.id.Itemname);
+        final TextView name = (TextView) convertView.findViewById(R.id.Itemname);
         name.setText(kajian.getVideoName());
         name.setTextColor(Color.BLACK);
-        post_title = (TextView) convertView.findViewById(R.id.Desc);
+        final TextView post_title = (TextView) convertView.findViewById(R.id.Desc);
         post_title.setText(kajian.getVideoDesc());
         post_title.setTextColor(Color.BLACK);
-        id = (TextView) convertView.findViewById(R.id.tv_videoId) ;
+        final TextView id = (TextView) convertView.findViewById(R.id.tv_videoId) ;
         id.setText(kajian.getVideoId());
-//        networkImageView.setImageUrl(kajian.getURL(), this.imageLoader);
+        Log.d("URL Kajian",kajian.getURL());
+        networkImageView.setImageUrl(kajian.getURL(), this.imageLoader);
         ((LinearLayout) convertView.findViewById(R.id.asser)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.d("ID VIDEO",id.getText().toString());
                 Intent intent=new Intent(view.getContext(), VideoKajianActivity.class);
                 intent.putExtra("videoId",id.getText().toString());
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

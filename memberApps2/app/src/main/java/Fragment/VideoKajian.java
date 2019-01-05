@@ -131,7 +131,7 @@ public class VideoKajian extends Fragment {
                         String videoid=jsonVideoId.getString("videoId");
 
                         Log.e(TAG," New Video Id" +videoid);
-//                        videoDetails.setURL(jsonObjectdefault.getString("url"));
+                        videoDetails.setURL(jsonObjectdefault.getString("url"));
                         videoDetails.setVideoName(jsonsnippet.getString("title"));
                         videoDetails.setVideoDesc(jsonsnippet.getString("description"));
                         videoDetails.setVideoId(videoid);
