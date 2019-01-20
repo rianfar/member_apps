@@ -1,33 +1,20 @@
 package Fragment;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.Toolbar;
 
 import com.google.gson.Gson;
-import com.memberapps2.DatePickerDialogFragment;
-import com.memberapps2.Home;
-import com.memberapps2.LoginActivity;
 import com.memberapps2.R;
 
-import connection.LoginAPI;
+import connection.Endpoint;
 import helper.RetroClient;
-import model.Artikel;
 import model.UserMember;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -90,7 +77,7 @@ public class Biodata extends Fragment {
     }
 
     public void getMember(String key, String user_id) {
-        RetroClient.getClient().create(LoginAPI.class).responseMember(key, user_id).enqueue(new Callback<UserMember>() {
+        RetroClient.getClient().create(Endpoint.class).responseMember(key, user_id).enqueue(new Callback<UserMember>() {
             @Override
             public void onResponse(Call<UserMember> call, Response<UserMember> response) {
                 if (response.isSuccessful()) {
@@ -156,7 +143,7 @@ public class Biodata extends Fragment {
                 member_office_telp = "", member_angkatan = "";
         Integer id = 0, member_gender = 0, member_job = 0;
 
-        RetroClient.getClient().create(LoginAPI.class).responseUpdateMember(key, id, member_no, member_name, member_nickname,
+        RetroClient.getClient().create(Endpoint.class).responseUpdateMember(key, id, member_no, member_name, member_nickname,
                 member_gender,member_blood,member_pob,member_dob,member_hoby,member_alamat,member_kota,member_poscode,member_telp,member_hp,
                 member_pinbb,member_job,member_jabatan,member_office_address,member_office_telp,member_angkatan).enqueue(new Callback<UserMember>() {
             @Override

@@ -7,8 +7,7 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import adapter.AdapterPendidikan;
+import Adapter.NewsFeedAdapter;
 
 import com.memberapps2.R;
 
@@ -24,7 +23,7 @@ public class NewsFeedFragment extends Fragment {
 
         tabLayout = (TabLayout) view.findViewById(R.id.tab_layout);
         viewPager = (ViewPager) view.findViewById(R.id.viewpager);
-        viewPager.setAdapter(new adapter.NewsFeedAdapter(getChildFragmentManager()));
+        viewPager.setAdapter(new NewsFeedAdapter(getChildFragmentManager()));
         tabLayout.post(new Runnable() {
             @Override
             public void run() {

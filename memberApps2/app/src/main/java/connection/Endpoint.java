@@ -7,11 +7,14 @@ import android.util.Log;
 //import datasource.remote.NewsFeedResponse;
 import Fragment.VideoKajian;
 import model.Artikel;
+import model.InfoJadwal;
 import model.InfoKajian;
+import model.InfoListSchedule;
 import model.Kajian;
 import model.UserList;
 import model.UserLogin;
 import model.UserMember;
+import model.UserSchedule;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -23,11 +26,12 @@ import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
-public interface LoginAPI {
+public interface Endpoint {
     @POST("api/members/login")
-
-//    Call<UserLogin> loginUser(@Body RequestLogin login);
     Call<UserList> responseUser(@Body UserLogin requestUser);
+
+    @POST("api/pendidikan/jadwallist")
+    Call<InfoListSchedule> responseJadwal(@Body UserSchedule requestSchedule);
 
     @GET("api/members/{key}/{user_id}")
     Call<UserMember> responseMember(@Query(value = "key") String key, @Query(value = "user_id") String user_id);

@@ -11,21 +11,16 @@ import com.memberapps2.R;
 
 import adapter.NilaiAdapter;
 
-public class Nilai extends Fragment {
+public class Sii extends Fragment {
     ListView lv;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         String[][] title = new String[][]{
-                {"Bimbingan Studi Qur'an ", "Tema Pendidikan", "Hasil : A", "ic_menu_home"},
-                {"Studi Islam Intensif", "Tema Pendidikan", "Hasil : B", "ic_menu_home"},
-                {"Bimbingan Studi Qur'an", "", "08.00 - 10.00 | Hadir", "ic_menu_home"},
-                {"Studi Islam Intensif", "Tema Pendidikan", "10.00 - 12.00 | Tidak Hadir", "ic_menu_home"},
-                {"Bimbingan Studi Qur'an ", "Tema Pendidikan", "Hasil : A", "ic_menu_home"},
-                {"Studi Islam Intensif", "Tema Pendidikan", "Hasil : B", "ic_menu_home"},
-                {"Bimbingan Studi Qur'an", "", "08.00 - 10.00 | Hadir", "ic_menu_home"},
-                {"Studi Islam Intensif", "Tema Pendidikan", "10.00 - 12.00 | Tidak Hadir", "ic_menu_home"}
-
+                {"Jadwal Pendidikan", "", "", "ic_menu_home"},
+                {"Materi", "", "", "ic_menu_home"},
+                {"Quiz", "", "", "ic_menu_home"},
+                {"Nilai", "", "", "ic_menu_home"},
         };
 
         View view = inflater.inflate(R.layout.fragment_nilai, container, false);

@@ -12,14 +12,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
-import adapter.HomeAdapter;
-import connection.LoginAPI;
+import Adapter.HomeAdapter;
+import connection.Endpoint;
 import helper.RetroClient;
 import model.Artikel;
 import model.Category;
@@ -60,7 +57,7 @@ public class Fragment_home extends Fragment {
     }
 
     private void artikel(String page) {
-        RetroClient.getClient().create(LoginAPI.class).responseArtikel(page).enqueue(new Callback<Artikel>() {
+        RetroClient.getClient().create(Endpoint.class).responseArtikel(page).enqueue(new Callback<Artikel>() {
             @Override
             public void onResponse(Call<Artikel> call, Response<Artikel> response) {
                 if (response.isSuccessful()) {

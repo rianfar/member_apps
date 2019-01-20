@@ -1,9 +1,6 @@
 package helper;
 
-import connection.LoginAPI;
-import model.UserLogin;
-import retrofit2.Call;
-import retrofit2.Callback;
+import connection.Endpoint;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -14,7 +11,7 @@ public class RetroClient {
 
     private static final String ROOT_URL = "https://internal.yisc-alazhar.or.id/";
 
-    private static LoginAPI service;
+    private static Endpoint service;
     private static RetroClient retroClient;
     public static Retrofit retrofit;
 
@@ -24,7 +21,7 @@ public class RetroClient {
                 .baseUrl(ROOT_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        service = retrofit.create(LoginAPI.class);
+        service = retrofit.create(Endpoint.class);
     }
 
     public static Retrofit getClient() {

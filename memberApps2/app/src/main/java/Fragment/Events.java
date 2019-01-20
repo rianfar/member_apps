@@ -8,20 +8,16 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.AtomicFile;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 
-import adapter.HomeAdapter;
-import connection.LoginAPI;
+import Adapter.HomeAdapter;
+import connection.Endpoint;
 import helper.RetroClient;
 import model.Artikel;
 import model.Category;
@@ -35,7 +31,6 @@ import com.memberapps2.R;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeoutException;
 
 public class Events extends Fragment {
     ListView lvEvents;
@@ -98,7 +93,7 @@ public class Events extends Fragment {
 
     private void artikel(String page) {
         Log.i("masuk page ", page);
-        RetroClient.getClient().create(LoginAPI.class).responsCategory(page,"event").enqueue(new Callback<Artikel>() {
+        RetroClient.getClient().create(Endpoint.class).responsCategory(page,"event").enqueue(new Callback<Artikel>() {
             @Override
             public void onResponse(Call<Artikel> call, Response<Artikel> response) {
                 if (response.isSuccessful()) {

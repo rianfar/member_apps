@@ -1,4 +1,4 @@
-package adapter;
+package Adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -8,7 +8,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import Fragment.Fragment_home;
 import Fragment.Events;
 import Fragment.Merchandise;
-import static Fragment.Profile.int_items;
+
 
 public class NewsFeedAdapter extends FragmentPagerAdapter {
 
@@ -39,7 +39,7 @@ public class NewsFeedAdapter extends FragmentPagerAdapter {
     @Override
     public int getCount() {
 
-        return int_items;
+        return 3;
 
     }
 

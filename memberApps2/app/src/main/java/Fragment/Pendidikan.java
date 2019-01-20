@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import adapter.AdapterPendidikan;
+import Adapter.AdapterPendidikan;
 
 import com.memberapps2.R;
 
@@ -16,7 +16,7 @@ public class Pendidikan extends Fragment {
 
     TabLayout tabLayout;
     ViewPager viewPager;
-    public static int int_items = 3;
+    public static int int_items = 2;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

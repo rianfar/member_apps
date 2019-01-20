@@ -1,14 +1,12 @@
-package adapter;
+package Adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import Fragment.Info;
-import Fragment.Absensi;
-import Fragment.Nilai;
+import Fragment.Bsq;
+import Fragment.Sii;
 
-import static Fragment.Profile.int_items;
 
 public class AdapterPendidikan extends FragmentPagerAdapter {
 
@@ -24,14 +22,11 @@ public class AdapterPendidikan extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                Info tab1 = new Info();
-                return tab1;
+                Bsq bsq = new Bsq();
+                return bsq;
             case 1:
-                Absensi tab2 = new Absensi();
-                return tab2;
-            case 2:
-                Nilai tab3 = new Nilai();
-                return tab3;
+                Sii sii = new Sii();
+                return sii;
         }
         return null;
     }
@@ -39,7 +34,7 @@ public class AdapterPendidikan extends FragmentPagerAdapter {
     @Override
     public int getCount() {
 
-        return int_items;
+        return 2;
 
     }
 
@@ -51,11 +46,9 @@ public class AdapterPendidikan extends FragmentPagerAdapter {
     public CharSequence getPageTitle(int position) {
         String namatab;
         if (position==0){
-            namatab = "Info";
-        }else if (position==1){
-            namatab = "Absensi";
+            namatab = "Bsq";
         }else{
-            namatab = "Nilai";
+            namatab = "Sii";
         }
         return namatab;
     }

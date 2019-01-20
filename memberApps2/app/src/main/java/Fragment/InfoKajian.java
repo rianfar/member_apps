@@ -20,7 +20,7 @@ import com.memberapps2.R;
 import java.util.ArrayList;
 import java.util.List;
 
-import connection.LoginAPI;
+import connection.Endpoint;
 import helper.RetroClient;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -88,7 +88,7 @@ public class InfoKajian extends Fragment {
 
     private void infokajian(String page) {
         Log.i("masuk page ", page);
-        RetroClient.getClient().create(LoginAPI.class).responseInfoKajian(page, "kajian").enqueue(new Callback<model.InfoKajian>() {
+        RetroClient.getClient().create(Endpoint.class).responseInfoKajian(page, "kajian").enqueue(new Callback<model.InfoKajian>() {
             @Override
             public void onResponse(Call<model.InfoKajian> call, Response<model.InfoKajian> response) {
                 if (response.isSuccessful()) {

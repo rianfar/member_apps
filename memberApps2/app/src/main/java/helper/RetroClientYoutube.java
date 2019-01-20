@@ -1,6 +1,6 @@
 package helper;
 
-import connection.LoginAPI;
+import connection.Endpoint;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -11,7 +11,7 @@ public class RetroClientYoutube {
 
     private static final String ROOT_URL = "https://www.googleapis.com/youtube/v3/search/";
 
-    private static LoginAPI service;
+    private static Endpoint service;
     private static RetroClientYoutube retroClientYoutube;
     public static Retrofit retrofit;
 
@@ -21,7 +21,7 @@ public class RetroClientYoutube {
                 .baseUrl(ROOT_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        service = retrofit.create(LoginAPI.class);
+        service = retrofit.create(Endpoint.class);
     }
 
     public static Retrofit getClient() {

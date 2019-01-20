@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import adapter.AdapterProfile;
+import Adapter.AdapterProfile;
 import com.memberapps2.R;
 
 public class Profile extends Fragment {

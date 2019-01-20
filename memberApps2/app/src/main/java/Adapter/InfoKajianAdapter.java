@@ -1,15 +1,11 @@
 package adapter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,12 +13,7 @@ import com.memberapps2.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.concurrent.atomic.AtomicInteger;
 
-import connection.LoginAPI;
-import model.Artikel;
-import model.Category;
-import model.Datum;
 import model.InfoKajian;
 
 public class InfoKajianAdapter extends ArrayAdapter<InfoKajian.Datum> {

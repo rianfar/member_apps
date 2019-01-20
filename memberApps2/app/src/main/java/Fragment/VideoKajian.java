@@ -1,11 +1,7 @@
 package Fragment;
 
 import android.app.Activity;
-import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -22,12 +18,9 @@ import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
-import com.google.android.youtube.player.YouTubePlayerSupportFragment;
 import com.google.android.youtube.player.YouTubePlayerView;
 
-import com.google.gson.Gson;
 import com.memberapps2.R;
 
 import org.json.JSONArray;
@@ -36,19 +29,9 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import adapter.AdapterVideo;
-import adapter.HomeAdapter;
-import connection.LoginAPI;
-import helper.RetroClient;
-import helper.RetroClientYoutube;
+import Adapter.AdapterVideo;
 import model.Kajian;
-import model.UserMember;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
-import static android.content.Context.MODE_PRIVATE;
 import static com.android.volley.VolleyLog.TAG;
 
 public class VideoKajian extends Fragment {
