@@ -9,7 +9,7 @@ import android.widget.ListView;
 
 import com.memberapps2.R;
 
-import adapter.NilaiAdapter;
+import Adapter.InfoAdapter;
 
 public class Sii extends Fragment {
     ListView lv;
@@ -23,9 +23,9 @@ public class Sii extends Fragment {
                 {"Nilai", "", "", "ic_menu_home"},
         };
 
-        View view = inflater.inflate(R.layout.fragment_nilai, container, false);
-        lv = (ListView) view.findViewById(R.id.listView4);
-        NilaiAdapter adapter = new NilaiAdapter(this.getActivity(), title);
+        View view = inflater.inflate(R.layout.fragment_sii, container, false);
+        lv = (ListView) view.findViewById(R.id.listViewsii);
+        InfoAdapter adapter = new InfoAdapter(this.getActivity(), title);
 //        ArrayAdapter<String> adapterlistmenu = new ArrayAdapter<String>(getActivity(), R.layout.mylist, R.id.Itemname, title);
         lv.setAdapter(adapter);
 

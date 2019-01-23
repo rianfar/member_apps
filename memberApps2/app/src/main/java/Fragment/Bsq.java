@@ -42,9 +42,9 @@ public class Bsq extends Fragment {
                     FragmentManager fragmentManager = getFragmentManager();
                     fragmentManager.beginTransaction().replace(R.id.framebsq, materi).commit();
                 }else if(i == 3){
-                    Materi materi = new Materi();
+                    Nilai nilai = new Nilai();
                     FragmentManager fragmentManager = getFragmentManager();
-                    fragmentManager.beginTransaction().replace(R.id.framebsq, materi).commit();
+                    fragmentManager.beginTransaction().replace(R.id.framebsq, nilai).commit();
                 }
             }
         });

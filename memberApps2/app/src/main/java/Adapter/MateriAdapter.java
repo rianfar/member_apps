@@ -1,6 +1,7 @@
 package Adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,7 @@ public class MateriAdapter extends ArrayAdapter<MateriList.DatumMateri> {
         MateriList.DatumMateri Datum = getItem(position);
         judul = (TextView) convertView.findViewById(R.id.txtjudul);
         judul.setText(Datum.getTema());
+        judul.setTextColor(Color.RED);
         return convertView;
     }
 }
