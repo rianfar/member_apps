@@ -11,10 +11,13 @@ import model.InfoJadwal;
 import model.InfoKajian;
 import model.InfoListSchedule;
 import model.Kajian;
+import model.MateriList;
 import model.UserList;
 import model.UserLogin;
+import model.UserMateri;
 import model.UserMember;
 import model.UserSchedule;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -22,7 +25,10 @@ import retrofit2.Callback;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.GET;
+import retrofit2.http.Headers;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -32,6 +38,14 @@ public interface Endpoint {
 
     @POST("api/pendidikan/jadwallist")
     Call<InfoListSchedule> responseJadwal(@Body UserSchedule requestSchedule);
+
+    @Headers("Content-Type: application/json")
+    @POST("api/pendidikan/materilist")
+    Call<MateriList> responseMateri(@Body UserMateri requestMateri);
+
+    @Multipart
+    @POST("api/pendidikan/materilist")
+    Call<MateriList> getMateri (@Part("key") RequestBody key, @Part ("user_id") RequestBody user_id);
 
     @GET("api/members/{key}/{user_id}")
     Call<UserMember> responseMember(@Query(value = "key") String key, @Query(value = "user_id") String user_id);
