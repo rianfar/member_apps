@@ -41,17 +41,9 @@ public interface Endpoint {
     @POST("api/pendidikan/jadwallist")
     Call<InfoListSchedule> responseJadwal(@Body UserSchedule requestSchedule);
 
-    @Headers("Content-Type: application/json")
-    @POST("api/pendidikan/materilist")
-    Call<MateriList> responseMateri(@Body UserMateri requestMateri);
-
     @Multipart
     @POST("api/pendidikan/materilist")
     Call<MateriList> getMateri (@Part("key") RequestBody key, @Part ("user_id") RequestBody user_id);
-
-    @Headers("Content-Type: application/json")
-    @POST("api/pendidikan/nilailist")
-    Call<NilaiList> responseNilai(@Body UserNilai requestNilai);
 
     @Multipart
     @POST("api/pendidikan/nilailist")
